@@ -1,0 +1,36 @@
+{
+  "name": "iviewlabs-trial",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trendit-tech/iviewlabs-trial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trendit-tech/iviewlabs-trial/issues"
+  },
+  "homepage": "https://github.com/trendit-tech/iviewlabs-trial#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.14",
+    "contentful": "^10.1.0",
+    "dotenv": "^16.0.3",
+    "fs": "^0.0.1-security",
+    "next": "^13.3.1",
+    "postcss": "^8.4.23",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
+    "tailwindcss": "^3.3.1"
+  }
+}
