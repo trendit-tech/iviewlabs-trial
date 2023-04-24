@@ -1,13 +1,13 @@
 import * as contentful from 'contentful';
 
-// const space = process.env.CONTENTFUL_SPACE;
-// const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+const space = process.env.CONTENTFUL_SPACE;
+const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
 
 export const fetchContentfulData = () => {
   return (dispatch) => {
     const client = contentful.createClient({
-      space: "oovsmbukyz6f",
-      accessToken: "RGz1-MZ11eexyDYU-VoNVSQinU-bovMXNI-og_qRUVM"
+      space: space,
+      accessToken: accessToken
     });
     
     client.getEntries()
