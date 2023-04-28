@@ -42,30 +42,30 @@ const HomePage = () => {
         />
       </Head>
       <div>
-  <div class="flex bg-gradient-to-b from-red-100 to-yellow-100 pt-5 sm:pt-10 px-5 sm:px-32">
-    <div class="py-2 sm:py-4">
+  <div className="flex bg-gradient-to-b from-red-100 to-yellow-100 pt-5 sm:pt-10 px-5 sm:px-32">
+    <div className="py-2 sm:py-4">
       <Categories onSelectCategory={handleSelectCategory} />
       <Filter onSelectFilter={handleSelectFilter} />
     </div>
   </div>
 
-  <div class="flex flex-row-reverse bg-gray-100 pt-2 sm:pt-4 px-5 sm:px-32">
-    <div class="w-20 sm:w-28 flex justify-between border border-gray-400 px-1 sm:px-2 py-2 sm:py-3">
+  <div className="flex flex-row-reverse bg-gray-100 pt-2 sm:pt-4 px-5 sm:px-32">
+    <div className="w-20 sm:w-28 flex justify-between border border-gray-400 px-1 sm:px-2 py-2 sm:py-3">
       <button
-        class={`border border-black rounded px-2 sm:px-3 ${
+        className={`border border-black rounded px-2 sm:px-3 ${
           view === "grid" ? "bg-yellow-200" : ""
         }`}
         onClick={() => setView("grid")}
       >
-        <i class="fa-solid fa-table-cells-large"></i>
+        <i className="fa-solid fa-table-cells-large"></i>
       </button>
       <button
-        class={`border border-black rounded px-2 sm:px-3 ${
+        className={`border border-black rounded px-2 sm:px-3 ${
           view === "list" ? "bg-yellow-200" : ""
         }`}
         onClick={() => setView("list")}
       >
-        <i class="fa-solid fa-bars"></i>
+        <i className="fa-solid fa-bars"></i>
       </button>
     </div>
   </div>
@@ -74,7 +74,7 @@ const HomePage = () => {
     <Loader />
   ) : (
     <div
-      class={`${
+      className={`${
         view === "grid"
           ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-8 px-5 sm:px-32"
           : "flex flex-col gap-y-3 sm:gap-y-5 px-5 sm:px-32"
