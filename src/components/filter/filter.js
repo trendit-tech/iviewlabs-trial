@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import {addFilter, emptyArray} from "../../../redux/actions/actions"
+import { addFilter, emptyArray } from "../../../redux/actions/actions";
 const filters = [
   { label: "Vegan", value: "vegan" },
   { label: "Vegetarian", value: "vegetarian" },
@@ -9,21 +9,26 @@ const filters = [
 ];
 
 function Filter({ onSelectFilter }) {
-  const selectedStoreFilters = useSelector((state) => state.filters.selectedFilters);
+  const selectedStoreFilters = useSelector(
+    (state) => state.filters.selectedFilters
+  );
+  const nonSimilerFilter = useSelector(
+    (state) => state.filters.nonSimilerFilter
+  );
+
 
   const dispatch = useDispatch();
 
   const [selectedFilters, setSelectedFilters] = useState([]);
 
   function handleClick(filterValue) {
-    if(selectedStoreFilters.includes(filterValue)){
-      return
-    }else{
+    if (selectedStoreFilters.includes(filterValue)) {
+      return;
+    } else {
       const updatedFilters = [...selectedFilters, filterValue];
       setSelectedFilters(updatedFilters);
       dispatch(addFilter(filterValue));
     }
-  
   }
 
   function handleClearFilters() {
@@ -31,7 +36,6 @@ function Filter({ onSelectFilter }) {
     onSelectFilter("");
     dispatch(emptyArray());
     console.log(selectedStoreFilters);
-
   }
 
   return (
@@ -52,11 +56,12 @@ function Filter({ onSelectFilter }) {
           <div key={val.value} className="ml-4">
             <button
               onClick={() => handleClick(val.value)}
-              className={`border border-black rounded-full text-black font-semibold px-6 py-1 ${
+              className={`${nonSimilerFilter.includes(val.value) ? "cursor-not-allowed pointer-events-none text-gray-500 border border-gray-400" : ""}  border border-black rounded-full text-black font-semibold px-6 py-1 ${
                 selectedFilters.indexOf(val.value) !== -1
                   ? `bg-black text-white`
                   : ""
               }`}
+              id={val.value}
             >
               {val.label}
             </button>

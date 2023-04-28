@@ -1,7 +1,10 @@
-import { ADD_FILTER , EMPTY_ARRAY} from '../actions/actions';
+
+import { ADD_FILTER , EMPTY_ARRAY , ADD_CATEGORY ,NON_SIMILER_FILTER} from '../actions/actions';
 
 const initialState = {
-  selectedFilters: []
+  selectedFilters: [],
+  selectedCategory:"",
+  nonSimilerFilter:[]
 };
 
 const filterReducer = (state = initialState, action) => {
@@ -16,6 +19,16 @@ const filterReducer = (state = initialState, action) => {
         ...state,
         selectedFilters: []
       };
+      case ADD_CATEGORY:
+        return {
+          ...state,
+          selectedCategory: action.payload
+        };
+        case NON_SIMILER_FILTER:
+        return {
+          ...state,
+          nonSimilerFilter: action.payload
+        };
     default:
       return state;
   }
