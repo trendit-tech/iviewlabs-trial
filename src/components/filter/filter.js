@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { addFilter, emptyArray } from "../../../redux/actions/actions";
+import {
+  addFilter,
+  emptyArray,
+  removeFilter,
+} from "../../../redux/actions/actions";
 const filters = [
   { label: "Vegan", value: "vegan" },
   { label: "Vegetarian", value: "vegetarian" },
-  { label: "Pescatarian", value: "Pescatarian" },
+  { label: "Pescatarian", value: "pescatarian" },
 ];
 
 function Filter({ onSelectFilter }) {
@@ -16,14 +20,12 @@ function Filter({ onSelectFilter }) {
     (state) => state.filters.nonSimilerFilter
   );
 
-
   const dispatch = useDispatch();
-
   const [selectedFilters, setSelectedFilters] = useState([]);
 
   function handleClick(filterValue) {
     if (selectedStoreFilters.includes(filterValue)) {
-      return;
+      dispatch(removeFilter(filterValue));
     } else {
       const updatedFilters = [...selectedFilters, filterValue];
       setSelectedFilters(updatedFilters);
@@ -56,7 +58,11 @@ function Filter({ onSelectFilter }) {
           <div key={val.value} className="ml-4">
             <button
               onClick={() => handleClick(val.value)}
-              className={`${nonSimilerFilter.includes(val.value) ? "cursor-not-allowed pointer-events-none text-gray-500 border border-gray-400" : ""}  border border-black rounded-full text-black font-semibold px-6 py-1 ${
+              className={`${
+                nonSimilerFilter.includes(val.value)
+                  ? "cursor-not-allowed pointer-events-none text-gray-500 border border-gray-400"
+                  : ""
+              }  border border-black rounded-full text-black font-semibold px-6 py-1 ${
                 selectedFilters.indexOf(val.value) !== -1
                   ? `bg-black text-white`
                   : ""
