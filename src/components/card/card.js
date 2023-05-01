@@ -1,10 +1,12 @@
+import Link from "next/link";
 import React from "react";
 
 const Card = (props) => {
   return (
     <>
       {props.view === "list" ? (
-        <div className="flex flex-row" key={props.title}>
+        <Link href={`/recipie/${encodeURIComponent(props.id)}`}>
+        <div className="flex flex-row" key={props.id}>
           <img
             className="w-full sm:w-1/3 h-40 object-cover object-center"
             src={props.imgUrl}
@@ -22,8 +24,10 @@ const Card = (props) => {
             <p className="text-gray-500 text-base">{props.des}.</p>
           </div>
         </div>
+        </Link>
       ) : (
-        <div className="rounded overflow-hidden shadow-lg" key={props.title}>
+        <Link href={`/recipie/${encodeURIComponent(props.id)}`}>
+        <div className="rounded overflow-hidden shadow-lg" key={props.id}>
           <img
             className="w-full h-32 object-cover object-center"
             src={props.imgUrl}
@@ -43,6 +47,7 @@ const Card = (props) => {
             <p className="text-gray-500 text-base">{props.des.slice(0, 86)}.</p>
           </div>
         </div>
+        </Link>
       )}
     </>
   );

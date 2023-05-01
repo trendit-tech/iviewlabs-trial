@@ -23,8 +23,8 @@ function Categories({ onSelectCategory }) {
     dispatch(emptyNonFilterArray());
     setSelectedCategory(category);
     onSelectCategory(category);
-    let filterOptions = ["vegan", "vegetarian", "pescatarian"];
 
+    let filterOptions = ["vegan", "vegetarian", "pescatarian"];
     let arr = entries.filter((val) => {
       return val.fields.category === category;
     });
