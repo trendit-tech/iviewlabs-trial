@@ -26,6 +26,9 @@ function Filter({ onSelectFilter }) {
   function handleClick(filterValue) {
     if (selectedStoreFilters.includes(filterValue)) {
       dispatch(removeFilter(filterValue));
+      setSelectedFilters(
+        selectedFilters.filter((value) => value !== filterValue)
+      );
     } else {
       const updatedFilters = [...selectedFilters, filterValue];
       setSelectedFilters(updatedFilters);
@@ -60,13 +63,13 @@ function Filter({ onSelectFilter }) {
               onClick={() => handleClick(val.value)}
               className={`${
                 nonSimilerFilter.includes(val.value)
-                  ? "cursor-not-allowed pointer-events-none text-gray-500 border border-gray-400"
-                  : ""
-              }  border border-black rounded-full text-black font-semibold px-6 py-1 ${
+                  ? "cursor-not-allowed pointer-events-none rounded-full text-gray-500 border border-gray-400"
+                  : " border border-black rounded-full text-black font-semibold"
+              }  px-6 py-1 ${
                 selectedFilters.indexOf(val.value) !== -1
                   ? `bg-black text-white`
                   : ""
-              }`}
+              } filter-btn`}
               id={val.value}
             >
               {val.label}
@@ -77,5 +80,4 @@ function Filter({ onSelectFilter }) {
     </div>
   );
 }
-
 export default Filter;

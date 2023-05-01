@@ -83,6 +83,7 @@ const HomePage = () => {
                     title={val.fields.name}
                     type={val.fields.type}
                     des={val.fields.des}
+                    id={val.fields.id}
                     view={view}
                   />
                 );
