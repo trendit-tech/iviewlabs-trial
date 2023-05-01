@@ -8,8 +8,10 @@ import Filter from "../components/filter/filter";
 import { addCategory } from "../../redux/actions/actions";
 import Loader from "../components/loader/loader";
 import View from "../components/grid-list-view/view";
+import { useRouter } from "next/router";
 
 const HomePage = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const entries = useSelector((state) => state.contentful.entries);
   const loading = useSelector((state) => state.contentful.isLoading);
@@ -35,8 +37,10 @@ const HomePage = () => {
   }
 
   useEffect(() => {
-    dispatch(fetchContentfulData());
-  }, [dispatch]);
+    if(!router.isReady) return;
+    const isPreview = router.query.preview === undefined ? false : router.query.preview;
+    dispatch(fetchContentfulData(isPreview));
+  }, [router.isReady, dispatch]);
   console.log(entries);
 
   return (
@@ -83,7 +87,7 @@ const HomePage = () => {
                     title={val.fields.name}
                     type={val.fields.type}
                     des={val.fields.des}
-                    id={val.fields.id}
+                    id={val.sys.id}
                     view={view}
                   />
                 );
