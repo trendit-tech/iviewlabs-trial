@@ -2,14 +2,15 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
+const space = process.env.CONTENTFUL_SPACE;
+const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+const previewAccessToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
+
 const details = () => {
   const contentful = require("contentful");
   const router = useRouter();
   const [data, setData] = useState([]);
-  const space = process.env.CONTENTFUL_SPACE;
-  const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
   const recipie_id = router.query.details;
-  const previewAccessToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN;
 
   const func = () => {
     let client;
