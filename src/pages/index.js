@@ -9,6 +9,7 @@ import { addCategory } from "../../redux/actions/actions";
 import Loader from "../components/loader/loader";
 import View from "../components/grid-list-view/view";
 import { useRouter } from "next/router";
+import { getCountryData } from "../availableLocales";
 
 const HomePage = () => {
   const router = useRouter();
@@ -36,17 +37,22 @@ const HomePage = () => {
     console.log(filter, "index");
   }
 
+  const func = async () => {
+    let countryLocale = await getCountryData();
+    const isPreview =
+      router.query.preview === undefined ? false : router.query.preview;
+    dispatch(fetchContentfulData(isPreview, countryLocale));
+  };
   useEffect(() => {
-    if(!router.isReady) return;
-    const isPreview = router.query.preview === undefined ? false : router.query.preview;
-    dispatch(fetchContentfulData(isPreview));
+    if (!router.isReady) return;
+
+    func();
   }, [router.isReady, dispatch]);
-  console.log(entries);
 
   return (
     <>
       <div>
-        <div className="flex bg-gradient-to-b from-red-100 to-yellow-100 pt-5 sm:pt-10 px-5 sm:px-32">
+        <div className="flex bg-gradient-to-b from-red-100 to-yellow-100 pt-5 sm:pt-5 px-5 sm:px-32">
           <div className="py-2 sm:py-4">
             <Categories onSelectCategory={handleSelectCategory} />
             <Filter onSelectFilter={handleSelectFilter} />
@@ -54,7 +60,6 @@ const HomePage = () => {
         </div>
 
         <View view={view} handleView={handleView} />
-
         {loading ? (
           <Loader />
         ) : (
