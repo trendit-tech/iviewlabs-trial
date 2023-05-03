@@ -24,7 +24,7 @@ function Filter({ onSelectFilter }) {
   const [selectedFilters, setSelectedFilters] = useState([]);
 
   function handleClick(filterValue) {
-    if (selectedStoreFilters.includes(filterValue)) {
+    if (selectedStoreFilters?.includes(filterValue)) {
       dispatch(removeFilter(filterValue));
       setSelectedFilters(
         selectedFilters.filter((value) => value !== filterValue)
@@ -40,7 +40,6 @@ function Filter({ onSelectFilter }) {
     setSelectedFilters([]);
     onSelectFilter("");
     dispatch(emptyArray());
-    console.log(selectedStoreFilters);
   }
 
   return (
@@ -62,7 +61,7 @@ function Filter({ onSelectFilter }) {
             <button
               onClick={() => handleClick(val.value)}
               className={`${
-                nonSimilerFilter.includes(val.value)
+                nonSimilerFilter?.includes(val.value)
                   ? "cursor-not-allowed pointer-events-none rounded-full text-gray-500 border border-gray-400"
                   : " border border-black rounded-full text-black font-semibold"
               }  px-6 py-1 ${

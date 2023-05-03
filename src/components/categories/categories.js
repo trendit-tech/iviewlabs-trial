@@ -15,28 +15,35 @@ const categories = [
 ];
 
 function Categories({ onSelectCategory }) {
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("");
   const entries = useSelector((state) => state.contentful.entries);
   const dispatch = useDispatch();
 
   function handleClick(category) {
-    dispatch(emptyNonFilterArray());
-    setSelectedCategory(category);
-    onSelectCategory(category);
+    if (selectedCategory === category) {
+      // Deselect the category
+      setSelectedCategory("");
+      dispatch(emptyNonFilterArray());
+      onSelectCategory("");
+    } else {
+      // Select the category
+      setSelectedCategory(category);
+      onSelectCategory(category);
 
-    let filterOptions = ["vegan", "vegetarian", "pescatarian"];
-    let arr = entries.filter((val) => {
-      return val.fields.category === category;
-    });
-    let filterValues = arr.map((val) => {
-      if (val.fields.type == "vegan" || "vegetarian" || "pescatarian") {
-        return val.fields.type;
-      }
-    });
-    const nonSimilarValues = filterOptions
-      .filter((value) => !filterValues.includes(value))
-      .concat(filterValues.filter((value) => !filterOptions.includes(value)));
-    dispatch(addNonFilterValue(nonSimilarValues));
+      let filterOptions = ["vegan", "vegetarian", "pescatarian"];
+      let arr = entries.filter((val) => {
+        return val.fields.category === category;
+      });
+      let filterValues = arr.map((val) => {
+        if (val.fields.type == "vegan" || "vegetarian" || "pescatarian") {
+          return val.fields.type;
+        }
+      });
+      const nonSimilarValues = filterOptions
+        .filter((value) => !filterValues?.includes(value))
+        .concat(filterValues.filter((value) => !filterOptions.includes(value)));
+      dispatch(addNonFilterValue(nonSimilarValues));
+    }
   }
 
   return (

@@ -20,10 +20,12 @@ const filterReducer = (state = initialState, action) => {
         ...state,
         selectedFilters: [...state.selectedFilters, action.payload],
       };
-      case REMOVE_FILTER:
+    case REMOVE_FILTER:
       return {
         ...state,
-        selectedFilters: state.selectedFilters.filter((val) => val !== action.payload),
+        selectedFilters: state.selectedFilters.filter(
+          (val) => val !== action.payload
+        ),
       };
     case EMPTY_ARRAY:
       return {
