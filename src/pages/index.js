@@ -43,6 +43,7 @@ const HomePage = () => {
       router.query.preview === undefined ? false : router.query.preview;
     dispatch(fetchContentfulData(isPreview, countryLocale));
   };
+
   useEffect(() => {
     if (!router.isReady) return;
 
@@ -52,7 +53,7 @@ const HomePage = () => {
   return (
     <>
       <div>
-        <div className="flex bg-gradient-to-b from-red-100 to-yellow-100 pt-5 sm:pt-5 px-5 sm:px-32">
+        <div className="flex bg-gradient-to-b from-red-100 to-yellow-100 pt-5 sm:pt-10 px-5 sm:px-32">
           <div className="py-2 sm:py-4">
             <Categories onSelectCategory={handleSelectCategory} />
             <Filter onSelectFilter={handleSelectFilter} />

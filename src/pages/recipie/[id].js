@@ -27,7 +27,7 @@ const id = () => {
   return (
     <div>
       <div className="bg-gray-100">
-        <div className="bg-gradient-to-b from-red-100 to-yellow-100 pt-5 pb-4 sm:pt-5 px-5 sm:px-32">
+        <div className="bg-gradient-to-b from-red-100 to-yellow-100 pt-5 pb-4 sm:pt-10 px-5 sm:px-32">
           <h3 className="font-bold text-2xl">
             {data.fields?.name.toLowerCase()}
           </h3>
@@ -39,7 +39,7 @@ const id = () => {
             </p>
           </Link>
         </div>
-        <div className="flex flex-col items-center py-4">
+        <div className="flex flex-col items-center py-10">
           <div className="w-6/12">
             <div>
               <img
