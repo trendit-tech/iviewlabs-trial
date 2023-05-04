@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  addCategory,
   addNonFilterValue,
-  emptyNonFilterArray,
+  emptyArray,
 } from "../../../redux/actions/actions";
 
 const categories = [
@@ -14,22 +14,19 @@ const categories = [
   "Drinks",
 ];
 
-function Categories({ onSelectCategory }) {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const entries = useSelector((state) => state.contentful.entries);
+function Categories() {
   const dispatch = useDispatch();
+  const entries = useSelector((state) => state.contentful.entries);
+  const selectedCategory = useSelector(
+    (state) => state.category.selectedCategory
+  );
 
   function handleClick(category) {
+    dispatch(emptyArray());
     if (selectedCategory === category) {
-      // Deselect the category
-      setSelectedCategory("");
-      dispatch(emptyNonFilterArray());
-      onSelectCategory("");
+      dispatch(addCategory(""));
     } else {
-      // Select the category
-      setSelectedCategory(category);
-      onSelectCategory(category);
-
+      dispatch(addCategory(category));
       let filterOptions = ["vegan", "vegetarian", "pescatarian"];
       let arr = entries.filter((val) => {
         return val.fields.category === category;

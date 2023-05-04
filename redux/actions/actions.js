@@ -3,7 +3,7 @@ export const REMOVE_FILTER = "REMOVE_FILTER";
 export const EMPTY_ARRAY = "EMPTY_ARRAY";
 export const ADD_CATEGORY = "ADD_CATEGORY";
 export const NON_SIMILER_FILTER = "NON_SIMILER_FILTER";
-export const EMPTY_NON_FILTER_ARRAY = "EMPTY_NON_FILTER_ARRAY";
+export const DISPLAY_VIEW = "DISPLAY_VIEW";
 
 export const addFilter = (filterValue) => ({
   type: ADD_FILTER,
@@ -29,6 +29,7 @@ export const addNonFilterValue = (filterValue) => ({
   payload: filterValue,
 });
 
-export const emptyNonFilterArray = () => ({
-  type: EMPTY_NON_FILTER_ARRAY,
+export const selectView = (view) => ({
+  type: DISPLAY_VIEW,
+  payload: view,
 });

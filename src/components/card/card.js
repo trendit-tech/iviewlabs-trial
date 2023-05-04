@@ -1,10 +1,12 @@
 import Link from "next/link";
-import React from "react";
+import { useSelector } from "react-redux";
 
 const Card = (props) => {
+  const view = useSelector((state) => state.view.view);
+
   return (
     <>
-      {props.view === "list" ? (
+      {view === "list" ? (
         <Link href={`/recipie/${encodeURIComponent(props.id)}`}>
           <div className="flex flex-row" key={props.id}>
             <img
