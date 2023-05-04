@@ -3,13 +3,11 @@ const availableLocales = [
     country_code: "IN",
     locale: "hi-IN",
     country_name: "India",
-    language: "hi-IN",
   },
   {
-    country_code: "AU",
-    locale: "en-AU",
-    country_name: "Australia",
-    language: "en-AU",
+    country_code: "US",
+    locale: "en-US",
+    country_name: "United States",
   },
 ];
 
