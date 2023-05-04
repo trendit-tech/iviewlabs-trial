@@ -1,3 +1,5 @@
+import moment from "moment-timezone";
+
 const availableLocales = [
   {
     country_code: "IN",
@@ -10,8 +12,6 @@ const availableLocales = [
     country_name: "United States",
   },
 ];
-
-import moment from "moment-timezone";
 
 const countryNames = {
   EST: "United States",

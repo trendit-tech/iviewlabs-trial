@@ -1,28 +1,26 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchContentfulSingleData } from "../../../redux/contentfulActions";
-import { getCountryData } from "../../availableLocales";
+import { fetchContentfulSingleData } from "../../../redux/actions/contentfulActions";
+import { getCountryData } from "../../helpers/availableLocales";
 
 const id = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const recipie_id = router.query.id;
   const isPreview = router.query.preview;
-  const data = useSelector((state) => state.con.singleEntry);
+  const data = useSelector((state) => state.contentfulDetails.singleEntry);
 
-  const func = async () => {
-    let countryLocale = await getCountryData();
+  const handleApiCall = () => {
+    let countryLocale = getCountryData();
     dispatch(fetchContentfulSingleData(isPreview, recipie_id, countryLocale));
   };
 
   useEffect(() => {
     if (!router.isReady) return;
-    func();
+    handleApiCall();
   }, [router.isReady]);
-
-  console.log(data);
 
   return (
     <div>
@@ -43,7 +41,7 @@ const id = () => {
           <div className="w-6/12">
             <div>
               <img
-                className="w-full h-80 object-cover object-center border border-gray-500"
+                className="w-full h-80 sm:h-46 object-cover object-center border border-gray-500"
                 src={data.fields?.image.fields.file.url}
               />
             </div>

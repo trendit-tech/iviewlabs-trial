@@ -1,44 +1,28 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "tailwindcss/tailwind.css";
-import { fetchContentfulData } from "../../redux/contentfulActions";
+import { fetchContentfulData } from "../../redux/actions/contentfulActions";
 import Card from "../components/card/card";
 import Categories from "../components/categories/categories";
 import Filter from "../components/filter/filter";
-import { addCategory } from "../../redux/actions/actions";
 import Loader from "../components/loader/loader";
 import View from "../components/grid-list-view/view";
 import { useRouter } from "next/router";
-import { getCountryData } from "../availableLocales";
+import { getCountryData } from "../helpers/availableLocales";
 
 const HomePage = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const entries = useSelector((state) => state.contentful.entries);
   const loading = useSelector((state) => state.contentful.isLoading);
-  const category = useSelector((state) => state.filters.selectedCategory);
+  const category = useSelector((state) => state.category.selectedCategory);
+  const view = useSelector((state) => state.view.view);
   const selectedStoreFilters = useSelector(
     (state) => state.filters.selectedFilters
   );
-  const [view, setView] = useState("grid");
 
-  const handleView = (viewPara) => {
-    if (viewPara === "grid") {
-      setView("grid");
-    } else if (viewPara === "list") {
-      setView("list");
-    }
-  };
-  function handleSelectCategory(category) {
-    dispatch(addCategory(category));
-  }
-
-  function handleSelectFilter(filter) {
-    console.log(filter, "index");
-  }
-
-  const func = async () => {
-    let countryLocale = await getCountryData();
+  const handleApiCall = () => {
+    let countryLocale = getCountryData();
     const isPreview =
       router.query.preview === undefined ? false : router.query.preview;
     dispatch(fetchContentfulData(isPreview, countryLocale));
@@ -46,8 +30,7 @@ const HomePage = () => {
 
   useEffect(() => {
     if (!router.isReady) return;
-
-    func();
+    handleApiCall();
   }, [router.isReady, dispatch]);
 
   return (
@@ -55,12 +38,12 @@ const HomePage = () => {
       <div>
         <div className="flex bg-gradient-to-b from-red-100 to-yellow-100 pt-5 sm:pt-10 px-5 sm:px-32">
           <div className="py-2 sm:py-4">
-            <Categories onSelectCategory={handleSelectCategory} />
-            <Filter onSelectFilter={handleSelectFilter} />
+            <Categories />
+            <Filter />
           </div>
         </div>
 
-        <View view={view} handleView={handleView} />
+        <View />
         {loading ? (
           <Loader />
         ) : (
@@ -94,7 +77,6 @@ const HomePage = () => {
                     type={val.fields.type}
                     des={val.fields.des}
                     id={val.sys.id}
-                    view={view}
                   />
                 );
               })}

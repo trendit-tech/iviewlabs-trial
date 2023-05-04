@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -12,33 +11,24 @@ const filters = [
   { label: "Pescatarian", value: "pescatarian" },
 ];
 
-function Filter({ onSelectFilter }) {
+function Filter() {
+  const dispatch = useDispatch();
   const selectedStoreFilters = useSelector(
     (state) => state.filters.selectedFilters
   );
   const nonSimilerFilter = useSelector(
-    (state) => state.filters.nonSimilerFilter
+    (state) => state.nonSimilerFilter.nonSimilerFilter
   );
-
-  const dispatch = useDispatch();
-  const [selectedFilters, setSelectedFilters] = useState([]);
 
   function handleClick(filterValue) {
     if (selectedStoreFilters?.includes(filterValue)) {
       dispatch(removeFilter(filterValue));
-      setSelectedFilters(
-        selectedFilters.filter((value) => value !== filterValue)
-      );
     } else {
-      const updatedFilters = [...selectedFilters, filterValue];
-      setSelectedFilters(updatedFilters);
       dispatch(addFilter(filterValue));
     }
   }
 
   function handleClearFilters() {
-    setSelectedFilters([]);
-    onSelectFilter("");
     dispatch(emptyArray());
   }
 
@@ -49,7 +39,7 @@ function Filter({ onSelectFilter }) {
         <button
           onClick={handleClearFilters}
           className={`border-2 border-black rounded-full text-black font-bold px-6 py-1 ${
-            selectedFilters.length === 0 ? `bg-black text-white` : ""
+            selectedStoreFilters.length === 0 ? `bg-black text-white` : ""
           }`}
         >
           All
@@ -65,7 +55,7 @@ function Filter({ onSelectFilter }) {
                   ? "cursor-not-allowed pointer-events-none rounded-full text-gray-500 border border-gray-400"
                   : " border border-black rounded-full text-black font-semibold"
               }  px-6 py-1 ${
-                selectedFilters.indexOf(val.value) !== -1
+                selectedStoreFilters.indexOf(val.value) !== -1
                   ? `bg-black text-white`
                   : ""
               } filter-btn`}
